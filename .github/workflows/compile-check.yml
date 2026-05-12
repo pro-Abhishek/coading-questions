@@ -21,4 +21,4 @@ jobs:
 
       # 3. Try to compile every .java file in your repo
       - name: Compile all Java files
-        run: javac *.java
+        run: find . -name "*.java" -print0 | xargs -0 javac
