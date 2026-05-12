@@ -1,0 +1,24 @@
+name: Java Compilation Guard
+
+# The Trigger: Run this whenever you push new code
+on: [push]
+
+jobs:
+  check-java:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pull your code into the virtual computer
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Install Java (JDK 17)
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 3. Try to compile every .java file in your repo
+      - name: Compile all Java files
+        run: find . -name "*.java" -print0 | xargs -0 javac
