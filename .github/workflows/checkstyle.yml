@@ -1,0 +1,19 @@
+name: Java Style Guard
+
+on: [push]
+
+jobs:
+  style-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # This action automatically scans your Java files for style issues
+      - name: Run Checkstyle
+        uses: dbelyaev/action-checkstyle@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 'warning' will show you the issues without necessarily blocking the build
+          level: warning
